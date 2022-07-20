@@ -37,8 +37,8 @@ public class AcmeFinancialBackOfficeApplication {
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	@Autowired RestTemplate restTemplate;
-	@Value("${service3.address:localhost:8083}") String serviceAddress3;
-	@Value("${service4.address:localhost:8084}") String serviceAddress4;
+	@Value("${service3.address:localhost:9083}") String serviceAddress3;
+	@Value("${service4.address:localhost:9084}") String serviceAddress4;
 	private static final int MOCK_PORT = 8765;
 
 	WireMock wireMock = new WireMock(MOCK_PORT);
@@ -60,16 +60,16 @@ public class AcmeFinancialBackOfficeApplication {
 	public String service2MethodInController() throws InterruptedException {
 		Thread.sleep(200);
 		log.info("Hello from Acme Financial's Backend service. Calling Acme Financial's Account Microservice and then Customer Microservice");
-		String service3 = restTemplate.getForObject("http://" + serviceAddress3 + "/startOfAccount-Microservice", String.class);
+		String service3 = restTemplate.getForObject("http://127.0.0.1:9083/startOfAccount-Microservice", String.class);
 		log.info("Got response from Acme Financial's Account Service [{}]", service3);
-		String service4 = restTemplate.getForObject("http://" + serviceAddress4 + "/startOfCustomer-Microservice", String.class);
+		String service4 = restTemplate.getForObject("http://127.0.0.1:9084/startOfCustomer-Microservice", String.class);
 		log.info("Got response from Acme Financial's Customer Service [{}]", service4);
 		return String.format("Hello from Acme Financial's Backend service. Calling Acme Financial's Account Service [%s] and then Customer Service [%s]", service3, service4);
 	}
 
 	@RequestMapping("/readtimeout")
 	public String connectionTimeout() throws InterruptedException {
-		Transaction t = Cat.newTransaction(CatConstants.TYPE_CALL, "connectionTimeout");
+		Transaction t = Cat.newTransaction(CatConstants.TYPE_REMOTE_CALL, "connectionTimeout");
 		Thread.sleep(500);
 		try {
 			log.info("Calling a missing service");

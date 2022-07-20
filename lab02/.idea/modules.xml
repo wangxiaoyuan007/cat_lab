@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/acme-financial-account-microservice/acme-financial-account-microservice.iml" filepath="$PROJECT_DIR$/acme-financial-account-microservice/acme-financial-account-microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/acme-financial-back-office-microservice/acme-financial-back-office-microservice.iml" filepath="$PROJECT_DIR$/acme-financial-back-office-microservice/acme-financial-back-office-microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/acme-financial-customer-microservice/acme-financial-customer-microservice.iml" filepath="$PROJECT_DIR$/acme-financial-customer-microservice/acme-financial-customer-microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/acme-financial-ui/acme-financial-ui.iml" filepath="$PROJECT_DIR$/acme-financial-ui/acme-financial-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/lab02.iml" filepath="$PROJECT_DIR$/.idea/lab02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-5/service-5.iml" filepath="$PROJECT_DIR$/service-5/service-5.iml" />
+    </modules>
+  </component>
+</project>

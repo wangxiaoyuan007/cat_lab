@@ -1,0 +1,15 @@
+version: '3.1'
+services:
+  cat-java-client:
+    restart: always                 # 自启动
+    volumes:
+      - /Users/xiaoyuan.wang/IdeaProjects/wx-fund/target/wx-fund-0.0.1-SNAPSHOT.jar:/wx-fund-0.0.1-SNAPSHOT.jar
+    build:
+      context: ./                   # 指定Dockerfile所在的路径
+      dockerfile: Dockerfile        # 指定Dockerfile文件名称
+    image: cat-java-client:latest              # 镜像名称:版本
+    container_name: cat-java-client         # 容器名称
+    ports:
+      - 8090:8090                   # 容器端口与服务器端口的映射
+    environment:
+      TZ: Asia/Shanghai

@@ -26,12 +26,12 @@ public class AcemFinancialUIApplication {
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	@Autowired RestTemplate restTemplate;
-	@Value("${service2.address:localhost:8082}") String serviceAddress;
+	@Value("${service2.address:localhost:9082}") String serviceAddress;
 
 	@RequestMapping("/start")
 	public String start() throws InterruptedException {
 		log.info("Welcome To Acme Financial. Calling Acme Financial's Back Office Microservice");
-		String response = restTemplate.getForObject("http://" + serviceAddress + "/startOfBackOffice-Service", String.class);
+		String response = restTemplate.getForObject("http://127.0.0.1:9082/startOfBackOffice-Service", String.class);
 		Thread.sleep(100);
 		log.info("Got response from Acme Financial's Back Office Microservice [{}]", response);
 		return response;
@@ -39,11 +39,11 @@ public class AcemFinancialUIApplication {
 
 	@RequestMapping("/readtimeout")
 	public String timeout() throws InterruptedException {
-		Transaction t = Cat.newTransaction(CatConstants.TYPE_URL, "timeout");
+		Transaction t = Cat.newTransaction(CatConstants.TYPE_REMOTE_CALL, "timeout");
 		try {
 			Thread.sleep(300);
 			log.info("Hello from service1. Calling service2 - should end up with read timeout");
-			String response = restTemplate.getForObject("http://" + serviceAddress + "/readtimeout", String.class);
+			String response = restTemplate.getForObject("http://127.0.0.1:9082/readtimeout", String.class);
 			log.info("Got response from service2 [{}]", response);
 			return response;
 		} catch (Exception e) {

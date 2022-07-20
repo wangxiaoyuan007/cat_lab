@@ -1,0 +1,23 @@
+version: '3.1'
+services:
+  cat-lab:
+    restart: always                 # 自启动
+    volumes:
+      - /Users/xiaoyuan.wang/home/java-project/cat_lab/lab02/acme-financial-account-microservice/target/acme-financial-account-microservice-0.0.1-SNAPSHOT.jar:/work/acme-financial-account-microservice.jar
+      - /Users/xiaoyuan.wang/home/java-project/cat_lab/lab02/acme-financial-back-office-microservice/target/acme-financial-back-office-microservice-0.0.1-SNAPSHOT.jar:/work/acme-financial-back-office-microservice.jar
+      - /Users/xiaoyuan.wang/home/java-project/cat_lab/lab02/acme-financial-customer-microservice/target/acme-financial-customer-microservice-0.0.1-SNAPSHOT.jar:/work/acme-financial-customer-microservice.jar
+      - /Users/xiaoyuan.wang/home/java-project/cat_lab/lab02/acme-financial-ui/target/acme-financial-ui-0.0.1-SNAPSHOT.jar:/work/acme-financial-ui.jar
+      - ./start.sh:/work/start.sh
+      - ./client.xml:/data/appdatas/cat/client.xml
+    build:
+      context: ./                   # 指定Dockerfile所在的路径
+      dockerfile: Dockerfile        # 指定Dockerfile文件名称
+    image: cat-lab:v2              # 镜像名称:版本
+    container_name: cat-lab         # 容器名称
+    ports:
+      - 9081:9081
+      - 9082:9082
+      - 9083:9083
+      - 9084:9084
+    environment:
+      TZ: Asia/Shanghai
